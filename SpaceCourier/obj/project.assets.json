@@ -130,6 +130,16 @@
         "runtime": {
           "lib/netcoreapp2.0/_._": {}
         }
+      },
+      "MonoGameLibrary/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/MonoGameLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MonoGameLibrary.dll": {}
+        }
       }
     }
   },
@@ -286,12 +296,18 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "MonoGameLibrary/1.0.0": {
+      "type": "project",
+      "path": "../MonoGameLibrary/MonoGameLibrary.csproj",
+      "msbuildProject": "../MonoGameLibrary/MonoGameLibrary.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
       "MonoGame.Content.Builder.Task >= 3.8.*",
-      "MonoGame.Framework.DesktopGL >= 3.8.*"
+      "MonoGame.Framework.DesktopGL >= 3.8.*",
+      "MonoGameLibrary >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -300,11 +316,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\ekuli\\Documents\\GitHub\\SpaceCourier\\SpaceCourier\\SpaceCourier.csproj",
+      "projectUniqueName": "C:\\Users\\ekuli\\Documents\\GitHub\\SpaceCourier\\SpaceCourier\\SpaceCourier.csproj",
       "projectName": "SpaceCourier",
-      "projectPath": "c:\\Users\\ekuli\\Documents\\GitHub\\SpaceCourier\\SpaceCourier\\SpaceCourier.csproj",
+      "projectPath": "C:\\Users\\ekuli\\Documents\\GitHub\\SpaceCourier\\SpaceCourier\\SpaceCourier.csproj",
       "packagesPath": "C:\\Users\\ekuli\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\ekuli\\Documents\\GitHub\\SpaceCourier\\SpaceCourier\\obj\\",
+      "outputPath": "C:\\Users\\ekuli\\Documents\\GitHub\\SpaceCourier\\SpaceCourier\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ekuli\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -321,7 +337,11 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\ekuli\\Documents\\GitHub\\SpaceCourier\\MonoGameLibrary\\MonoGameLibrary.csproj": {
+              "projectPath": "C:\\Users\\ekuli\\Documents\\GitHub\\SpaceCourier\\MonoGameLibrary\\MonoGameLibrary.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

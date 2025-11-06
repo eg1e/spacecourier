@@ -1,0 +1,5 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/ekuli/Documents/GitHub/SpaceCourier/SpaceCourier/Content/DefaultFont.spritefont","C:/Users/ekuli/Documents/GitHub/SpaceCourier/SpaceCourier/Content/bin/DesktopGL/Content/DefaultFont.xnb","FontDescriptionProcessor","SpriteFontContent",481,37913,0.1679444
+"C:/Users/ekuli/Documents/GitHub/SpaceCourier/SpaceCourier/Content/images/planet1.png","C:/Users/ekuli/Documents/GitHub/SpaceCourier/SpaceCourier/Content/bin/DesktopGL/Content/images/planet1.xnb","TextureProcessor","Texture2DContent",45465,20821,0.1066458
+"C:/Users/ekuli/Documents/GitHub/SpaceCourier/SpaceCourier/Content/images/planet2.png","C:/Users/ekuli/Documents/GitHub/SpaceCourier/SpaceCourier/Content/bin/DesktopGL/Content/images/planet2.xnb","TextureProcessor","Texture2DContent",9213,20821,0.0063516
+"C:/Users/ekuli/Documents/GitHub/SpaceCourier/SpaceCourier/Content/images/planet3.png","C:/Users/ekuli/Documents/GitHub/SpaceCourier/SpaceCourier/Content/bin/DesktopGL/Content/images/planet3.xnb","TextureProcessor","Texture2DContent",39413,20821,0.0032109

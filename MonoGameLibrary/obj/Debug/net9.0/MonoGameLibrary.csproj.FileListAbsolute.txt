@@ -1,0 +1,12 @@
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\MonoGameLibrary\bin\Debug\net9.0\MonoGameLibrary.deps.json
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\MonoGameLibrary\bin\Debug\net9.0\MonoGameLibrary.dll
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\MonoGameLibrary\bin\Debug\net9.0\MonoGameLibrary.pdb
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\MonoGameLibrary\obj\Debug\net9.0\MonoGameLibrary.csproj.AssemblyReference.cache
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\MonoGameLibrary\obj\Debug\net9.0\MonoGameLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\MonoGameLibrary\obj\Debug\net9.0\MonoGameLibrary.AssemblyInfoInputs.cache
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\MonoGameLibrary\obj\Debug\net9.0\MonoGameLibrary.AssemblyInfo.cs
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\MonoGameLibrary\obj\Debug\net9.0\MonoGameLibrary.csproj.CoreCompileInputs.cache
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\MonoGameLibrary\obj\Debug\net9.0\MonoGameLibrary.dll
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\MonoGameLibrary\obj\Debug\net9.0\refint\MonoGameLibrary.dll
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\MonoGameLibrary\obj\Debug\net9.0\MonoGameLibrary.pdb
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\MonoGameLibrary\obj\Debug\net9.0\ref\MonoGameLibrary.dll
