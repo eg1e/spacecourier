@@ -38,3 +38,9 @@ C:\Users\ekuli\Documents\GitHub\SpaceCourier\SpaceCourier\bin\Debug\net9.0\Conte
 C:\Users\ekuli\Documents\GitHub\SpaceCourier\SpaceCourier\bin\Debug\net9.0\Content\images\planet2.xnb
 C:\Users\ekuli\Documents\GitHub\SpaceCourier\SpaceCourier\bin\Debug\net9.0\Content\images\planet3.xnb
 C:\Users\ekuli\Documents\GitHub\SpaceCourier\SpaceCourier\bin\Debug\net9.0\Content\DefaultFont.xnb
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\SpaceCourier\bin\Debug\net9.0\Content\images\sun (1).xnb
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\SpaceCourier\bin\Debug\net9.0\Content\images\sun (2).xnb
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\SpaceCourier\bin\Debug\net9.0\Content\images\sun (3).xnb
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\SpaceCourier\bin\Debug\net9.0\Content\images\sun (4).xnb
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\SpaceCourier\bin\Debug\net9.0\Content\images\sun (5).xnb
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\SpaceCourier\bin\Debug\net9.0\Content\images\sun (6).xnb
