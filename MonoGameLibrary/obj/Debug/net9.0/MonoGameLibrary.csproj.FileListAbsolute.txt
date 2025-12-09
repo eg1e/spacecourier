@@ -10,3 +10,4 @@ C:\Users\ekuli\Documents\GitHub\SpaceCourier\MonoGameLibrary\obj\Debug\net9.0\Mo
 C:\Users\ekuli\Documents\GitHub\SpaceCourier\MonoGameLibrary\obj\Debug\net9.0\refint\MonoGameLibrary.dll
 C:\Users\ekuli\Documents\GitHub\SpaceCourier\MonoGameLibrary\obj\Debug\net9.0\MonoGameLibrary.pdb
 C:\Users\ekuli\Documents\GitHub\SpaceCourier\MonoGameLibrary\obj\Debug\net9.0\ref\MonoGameLibrary.dll
+C:\Users\ekuli\Documents\GitHub\SpaceCourier\MonoGameLibrary\obj\Debug\net9.0\MonoGameLibrary.sourcelink.json

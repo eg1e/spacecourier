@@ -1,9 +1,8 @@
-public class Planet
+public abstract class Planet
 {
-    public string Name { get; set; }
+    public string Name { get;}
 
-    public Planet(string name)
-    {
-        this.Name = name;
-    }
+    public Planet(string name) => Name = name;
+
+    public abstract void OnVisit(Player player);
 }

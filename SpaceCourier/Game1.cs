@@ -64,68 +64,29 @@ public class Game1 : Core
 	{
 		if (_gameOver) return;
 
-		KeyboardState keyboardState = Keyboard.GetState();
+		var ks = Keyboard.GetState();
 		var routes = _engine.GetRoutesFrom(_player.Current).ToList();
-		for (int i = 0; i < routes.Count; i++)
-		{
-			var key = Keys.D1 + i;
-			if (keyboardState.IsKeyDown(key) && _previousKeyboardState.IsKeyUp(key))
-			{
-				
-				var route = routes[i];
-				_player.Fuel -= route.FuelCost;
-				var eventTriggered = EventSystem.TriggerEvent(_player, route.Risk);
 
-				if (eventTriggered == 0)
-				{
-					_message = "Pirates attacked!";
-					_player.Fuel -= 20;
-				}
-				else if (eventTriggered == 1)
-				{
-					_message = "Fuel leak!";
-					_player.Fuel -= 15;
-				}
-				else if (eventTriggered == 2)
-				{
-					_message = "Navigation error!";
-					_player.Fuel -= 10;
-				}
-				else if (eventTriggered == 3)
-				{
-					_message = "Solar storm!";
-					_player.Fuel -= 12;
-				}
-				else
-                {
-					_message = "Trip was smooth";
-                }
-				
+		var routeIndex = GetSelectedRouteIndex(ks, routes.Count);
+		if (routeIndex is int idx)
+			HandleRouteSelection(routes[idx]);
 
-				if (_player.Fuel <= 0)
-				{
-					_message = "You ran out of fuel!";
-					_gameOver = true;
-					break;
-				}
+		if (ks.IsKeyDown(Keys.Escape)) Exit();
 
-				_player.Current = route.DestinationPlanet;
-
-				if (_player.Current.Name == "Destination")
-				{
-					_message = "You delivered the cargo successfully!";
-					_gameOver = true;
-				}
-
-			}
-		}
-		if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-			Exit();
-
-		// TODO: Add your update logic here
-		_previousKeyboardState = keyboardState;
+		_previousKeyboardState = ks;
 		base.Update(gameTime);
 	}
+
+private void HandleRouteSelection(Route route)
+{
+    TravelResult result = _engine.TryTravel(_player, route);
+
+    _message = result.Message;
+
+    if (result.IsGameOver)
+        _gameOver = true;
+}
+
 
 	protected override void Draw(GameTime gameTime)
 	{
@@ -243,4 +204,14 @@ public class Game1 : Core
 
 		SpriteBatch.DrawString(font, costText, textPosition - textSize / 2, Color.Tomato);
 	}
+
+	private int? GetSelectedRouteIndex(KeyboardState ks, int max)
+{
+    for (int i = 0; i < max; i++)
+        if (ks.IsKeyDown(Keys.D1 + i) && _previousKeyboardState.IsKeyUp(Keys.D1 + i))
+            return i;
+
+    return null;
+}
+
 }
