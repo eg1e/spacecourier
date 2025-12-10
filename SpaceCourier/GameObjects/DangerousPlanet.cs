@@ -3,14 +3,20 @@ using System;
 public class DangerousPlanet : Planet
 {
     private readonly int _dangerLevel;
+    private readonly int _fuelPricePerDangerLevel = 5;
 
     public DangerousPlanet(string name, int danger) : base(name)
     {
         _dangerLevel = danger;
     }
 
+    public override string GetPlanetType()
+    {
+        return "Danger " + _dangerLevel.ToString();
+    }
+
     public override void OnVisit(Player player)
     {
-        Console.WriteLine("Entering dangerous planet!");
+        player.SpendFuel(_dangerLevel * _fuelPricePerDangerLevel);
     }
 }

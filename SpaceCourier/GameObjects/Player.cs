@@ -28,7 +28,7 @@ public class Player
         Current = next;
     }
 
-        public void LoseCargo()
+    public void LoseCargo()
     {
         IsCargoLost = true;
     }

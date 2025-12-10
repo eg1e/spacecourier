@@ -13,7 +13,7 @@ public class EventService
     public ISpaceEvent? RollEvent(int risk)
     {
         int roll = _rng.Next(100);
-        const int EventChancePercent = 20;
+        int EventChancePercent = risk;
 
         if (roll < EventChancePercent)
             return _factory.CreateEvent();

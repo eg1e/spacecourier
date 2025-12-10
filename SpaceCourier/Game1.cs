@@ -27,7 +27,12 @@ public class Game1 : Core
 	private string _message = "Choose your path using keys 1-4";
 	private bool _gameOver;
 
-	public Game1() : base("Space Courier", 1280, 720, false) { }
+	private GameRenderer _renderer;
+	private SpriteBatch _spriteBatch;
+
+	public Game1() : base("Space Courier", 1280, 720, false)
+    {
+    }
 
 	protected override void Initialize()
 	{
@@ -77,141 +82,46 @@ public class Game1 : Core
 		base.Update(gameTime);
 	}
 
-private void HandleRouteSelection(Route route)
-{
-    TravelResult result = _engine.TryTravel(_player, route);
+	private void HandleRouteSelection(Route route)
+	{
+		TravelResult result = _engine.TryTravel(_player, route);
 
-    _message = result.Message;
+		_message = result.Message;
 
-    if (result.IsGameOver)
-        _gameOver = true;
-}
+		if (result.IsGameOver)
+        {
+			_gameOver = true;
+        }
+	}
 
 
 	protected override void Draw(GameTime gameTime)
 	{
-		SpriteBatch.Begin();
+		_spriteBatch = new SpriteBatch(GraphicsDevice);
+		_renderer = new GameRenderer(
+			spriteBatch: _spriteBatch,
+			lineTexture: _lineTexture,
+			font: _font,
+			planetTextures: _planetTextures
+		);
 
-		GraphicsDevice.Clear(Color.MidnightBlue);
-		SpriteBatch.DrawString(_font, $"Fuel: {_player.Fuel}", new Vector2(10, 10), Color.White);
-		SpriteBatch.DrawString(_font, $"Location: {_player.Current.Name}", new Vector2(10, 40), Color.White);
-		SpriteBatch.DrawString(_font, _message, new Vector2(10, 70), Color.Yellow);
-
-		if (_planetTextures.TryGetValue(_player.Current.Name, out var currentPlanetTexture))
-		{
-			Vector2 currentPos = new Vector2(
-				(GraphicsDevice.Viewport.Width - currentPlanetTexture.Width) / 2,
-				GraphicsDevice.Viewport.Height - currentPlanetTexture.Height - 20
-			);
-
-			SpriteBatch.Draw(currentPlanetTexture, currentPos, Color.White);
-
-			// Planet name above current planet
-			Vector2 nameSize = _font.MeasureString(_player.Current.Name);
-			Vector2 namePos = new Vector2(
-				(GraphicsDevice.Viewport.Width - nameSize.X) / 2,
-				currentPos.Y - nameSize.Y - 5
-			);
-			SpriteBatch.DrawString(_font, _player.Current.Name, namePos, Color.Yellow);
-
-			// --- Draw connected planets above current planet ---
-			var nextRoutes = _engine.GetRoutesFrom(_player.Current).ToList();
-			if (nextRoutes.Count > 0)
-			{
-				float spacing = 250; // space between planets
-				float totalWidth = nextRoutes.Count * spacing;
-				float startX = (GraphicsDevice.Viewport.Width - totalWidth) / 2;
-
-				for (int i = 0; i < nextRoutes.Count; i++)
-				{
-					var route = nextRoutes[i];
-					if (_planetTextures.TryGetValue(route.DestinationPlanet.Name, out var nextPlanetTexture))
-					{
-						Vector2 nextPos = new Vector2(
-							startX + i * spacing + (spacing - nextPlanetTexture.Width) / 2 + nextPlanetTexture.Width / 2,
-							currentPos.Y - nextPlanetTexture.Height - 160 + nextPlanetTexture.Height / 2
-						);
-
-						Vector2 currentCenter = currentPos + new Vector2(currentPlanetTexture.Width / 2, currentPlanetTexture.Height / 2);
-						DrawDottedLine(currentCenter, nextPos, Color.White, route, _font, segmentLength: 8, spacing: 5, thickness: 3f);
-
-						Vector2 planetDrawPos = nextPos - new Vector2(nextPlanetTexture.Width / 2, nextPlanetTexture.Height / 2);
-						SpriteBatch.Draw(nextPlanetTexture, planetDrawPos, Color.White);
-
-						// Draw planet name above texture
-						Vector2 nextNameSize = _font.MeasureString(route.DestinationPlanet.Name);
-						Vector2 nextNamePos = new Vector2(
-							planetDrawPos.X + (nextPlanetTexture.Width - nextNameSize.X) / 2,
-							planetDrawPos.Y - nextNameSize.Y - 5
-						);
-						SpriteBatch.DrawString(_font, route.DestinationPlanet.Name, nextNamePos, Color.LightGreen);
-						Vector2 routeNumberSize = _font.MeasureString("[" + (i + 1).ToString() + "]");
-						Vector2 routeNumberPos = new Vector2(
-							planetDrawPos.X + (nextPlanetTexture.Width - routeNumberSize.X) / 2,
-							planetDrawPos.Y - routeNumberSize.Y + 100
-						);
-
-						SpriteBatch.DrawString(_font, "[" + (i + 1) + "]".ToString(), routeNumberPos, Color.Yellow);
-					}
-				}
-			}
-		}
-
-		SpriteBatch.End();
-
+		_renderer.Draw(
+			_player,
+			_engine.GetRoutesFrom(_player.Current),
+			_message,
+			GraphicsDevice
+		);
 		base.Draw(gameTime);
 	}
 
-	private void DrawDottedLine(Vector2 start, Vector2 end, Color color, Route route, SpriteFont font, float segmentLength = 10f, float spacing = 5f, float thickness = 2f)
-	{
-		Vector2 delta = end - start;
-		float totalLength = delta.Length();
-		Vector2 direction = Vector2.Normalize(delta);
-
-		float drawnLength = 0f;
-
-		while (drawnLength < totalLength)
-		{
-			float currentSegmentLength = Math.Min(segmentLength, totalLength - drawnLength);
-			Vector2 segmentStart = start + direction * drawnLength;
-
-			// Calculate angle
-			float angle = (float)Math.Atan2(delta.Y, delta.X);
-
-			// Draw segment
-			SpriteBatch.Draw(_lineTexture, segmentStart, null, color, angle,
-				Vector2.Zero, new Vector2(currentSegmentLength, thickness),
-				SpriteEffects.None, 0f);
-
-			drawnLength += segmentLength + spacing; // Move forward with spacing
-		}
-
-		DrawRouteFuelCost(route, start, direction, totalLength, font);
-	}
-	
-	private void DrawRouteFuelCost(Route route, Vector2 start, Vector2 direction, float totalLength, SpriteFont font)
-	{
-		// Find the midpoint between planets
-		Vector2 middle = start + direction * (totalLength / 2);
-
-		// Display route cost text
-		string costText = $"Cost: {route.FuelCost}";
-		Vector2 textSize = font.MeasureString(costText);
-
-		// Offset text slightly above the line
-		Vector2 perpendicular = new Vector2(-direction.Y, direction.X);
-		Vector2 textPosition = middle + perpendicular * (-15); // move upward 15px
-
-		SpriteBatch.DrawString(font, costText, textPosition - textSize / 2, Color.Tomato);
-	}
 
 	private int? GetSelectedRouteIndex(KeyboardState ks, int max)
-{
-    for (int i = 0; i < max; i++)
-        if (ks.IsKeyDown(Keys.D1 + i) && _previousKeyboardState.IsKeyUp(Keys.D1 + i))
-            return i;
+	{
+		for (int i = 0; i < max; i++)
+			if (ks.IsKeyDown(Keys.D1 + i) && _previousKeyboardState.IsKeyUp(Keys.D1 + i))
+				return i;
 
-    return null;
-}
+		return null;
+	}
 
 }

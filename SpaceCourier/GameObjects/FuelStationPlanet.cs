@@ -8,4 +8,9 @@ public class FuelStationPlanet : Planet
     {
         player.AddFuel(_refuelAmount);
     }
+
+    public override string GetPlanetType()
+    {
+        return "Fuel station";
+    }
 }

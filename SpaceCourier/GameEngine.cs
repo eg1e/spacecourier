@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +8,6 @@ public class GameEngine
     public IReadOnlyList<Route> Routes { get; }
 
     private readonly EventService _eventService;
-    private readonly EventResolver _resolver = new();
 
     public GameEngine()
     {
@@ -17,24 +17,39 @@ public class GameEngine
         Routes = BuildRoutes(Planets);
     }
 
+    public GameEngine(EventService eventService)
+    {
+        _eventService = eventService ?? throw new ArgumentNullException(nameof(eventService));
+        Planets = BuildPlanets();
+        Routes = BuildRoutes(Planets);
+    }
+
+
     public TravelResult TryTravel(Player player, Route route)
     {
+        string gameOverMessage = "\nGAME OVER!";
+
         if (!HasEnoughFuel(player, route))
-            return new TravelResult("You don't have enough fuel!", isGameOver: true);
+            return new TravelResult("You don't have enough fuel!" + gameOverMessage, isGameOver: true);
 
         ApplyTravelCost(player, route);
 
-        // Polymorphic event
         var spaceEvent = _eventService.RollEvent(route.Risk);
-        string message = "Trip was smooth.";
+        string message =  "Trip was smooth.";
+
+        route.DestinationPlanet.OnVisit(player);
+
 
         if (spaceEvent != null)
         {
             spaceEvent.Apply(player);
             message = spaceEvent.GetType().Name.Replace("Event", " occurred!");
-            if (player.Fuel <= 0)
-                return new TravelResult(message + " You ran out of fuel!", isGameOver: true);
         }
+
+        if (player.IsCargoLost)
+            return new TravelResult(message + "You lost the cargo" + gameOverMessage, isGameOver: true);
+        if (player.Fuel <= 0)
+            return new TravelResult(message + " You ran out of fuel!" + gameOverMessage, isGameOver: true);
 
         player.MoveTo(route.DestinationPlanet);
 
@@ -48,6 +63,7 @@ public class GameEngine
 
     private static bool HasEnoughFuel(Player player, Route route)
         => player.Fuel >= route.FuelCost;
+        
 
     private static void ApplyTravelCost(Player player, Route route)
         => player.SpendFuel(route.FuelCost);
@@ -66,7 +82,7 @@ public class GameEngine
             new PlanetBuilder().WithName("Alpha").Build(),
             new PlanetBuilder().WithName("Beta").Build(),
             new PlanetBuilder().WithName("Destination").Build(),
-            new PlanetBuilder().WithName("Solarion Belt").AsDangerous().Build(),
+            new PlanetBuilder().WithName("Solarion Belt").AsRefuelStationPlanet().Build(),
             new PlanetBuilder().WithName("Zenova Obscura").AsDangerous().Build(),
             new PlanetBuilder().WithName("Relicos Delta").AsDangerous().Build(),
         };
@@ -85,14 +101,14 @@ public class GameEngine
         return new()
         {
             new Route(earth, alpha, 15, 20),
-            new Route(earth, beta, 10, 80),
-            new Route(alpha, dest, 20, 90),
-            new Route(beta, solarion, 25, 100),
-            new Route(beta, zenova, 5, 50),
-            new Route(beta, relicos, 12, 70),
-            new Route(solarion, dest, 7, 30),
-            new Route(zenova, dest, 8, 40),
-            new Route(relicos, dest, 14, 80)
+            new Route(earth, beta, 10, 30),
+            new Route(alpha, dest, 20, 49),
+            new Route(beta, solarion, 25, 10),
+            new Route(beta, zenova, 15, 55),
+            new Route(beta, relicos, 12, 37),
+            new Route(solarion, dest, 13, 23),
+            new Route(zenova, dest, 8, 41),
+            new Route(relicos, dest, 14, 28)
         };
     }
 }

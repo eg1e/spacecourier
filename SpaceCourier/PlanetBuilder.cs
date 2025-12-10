@@ -1,3 +1,5 @@
+using System;
+
 public class PlanetBuilder
 {
     private string _name;
@@ -25,7 +27,12 @@ public class PlanetBuilder
     public Planet Build()
     {
         if (_isFuelPlanet) return new FuelStationPlanet(_name);
-        if (_isDangerous) return new DangerousPlanet(_name, 5);
+        if (_isDangerous)
+        {
+            int dangerLevel = Random.Shared.Next(1, 11);
+            return new DangerousPlanet(_name, dangerLevel);
+        }
+        
         return new SafePlanet(_name);
     }
 }
