@@ -1,7 +1,8 @@
 public class PirateAttackEvent : ISpaceEvent
 {
-    public void Execute(Player player)
+    public EventResult Execute(Player player)
     {
         player.LoseCargo();
+        return new EventResult("Pirates attacked! Cargo lost!", true);
     }
 }

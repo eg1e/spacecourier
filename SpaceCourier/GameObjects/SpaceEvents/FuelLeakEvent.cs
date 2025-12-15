@@ -1,7 +1,8 @@
 class FuelLeakEvent : ISpaceEvent
 {
-    public  void Execute(Player player)
+    public EventResult Execute(Player player)
     {
         player.SpendFuel(GameConstants.FuelLeakDamage);
+        return new EventResult("Fuel leak!", false);
     }
 }

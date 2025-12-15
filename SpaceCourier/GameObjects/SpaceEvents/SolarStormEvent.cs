@@ -1,7 +1,8 @@
 class SolarStormEvent : ISpaceEvent
 {
-    public void Execute(Player player)
+    public EventResult Execute(Player player)
     {
         player.SpendFuel(GameConstants.SolarStormDamage);
+        return new EventResult("Solar storm occured!", false);
     }
 }

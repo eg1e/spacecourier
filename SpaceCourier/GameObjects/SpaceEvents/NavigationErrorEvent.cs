@@ -1,7 +1,8 @@
 public class NavigationErrorEvent : ISpaceEvent
 {
-    public void Execute(Player player)
+    public EventResult Execute(Player player)
     {
         player.SpendFuel(GameConstants.NavigationErrorDamage);
+        return new EventResult("Navigation error!", false);
     }
 }

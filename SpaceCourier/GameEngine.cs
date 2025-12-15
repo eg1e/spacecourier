@@ -34,20 +34,21 @@ public class GameEngine
 
         ApplyTravelCost(player, route);
 
-        var spaceEvent = _eventService.RollEvent(route.Risk);
+        route.DestinationPlanet.OnVisit(player);
         string message =  "Trip was smooth.";
 
-        route.DestinationPlanet.OnVisit(player);
-
-
+        var spaceEvent = _eventService.RollEvent(route.Risk);
         if (spaceEvent != null)
         {
-            spaceEvent.Execute(player);
-            message = spaceEvent.GetType().Name.Replace("Event", " occurred!");
+            var eventResult = spaceEvent.Execute(player);
+            message = eventResult.Message;
+
+            if (eventResult.IsGameOver)
+            {
+                return new TravelResult(message + gameOverMessage, isGameOver: true);
+            }
         }
 
-        if (player.IsCargoLost)
-            return new TravelResult(message + "You lost the cargo" + gameOverMessage, isGameOver: true);
         if (player.Fuel <= 0)
             return new TravelResult(message + " You ran out of fuel!" + gameOverMessage, isGameOver: true);
 
