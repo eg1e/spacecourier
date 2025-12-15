@@ -1,4 +1,5 @@
 using System;
+using Microsoft.Xna.Framework;
 
 public class EventService
 {
@@ -12,7 +13,7 @@ public class EventService
 
     public ISpaceEvent? RollEvent(int risk)
     {
-        int roll = _rng.Next(100);
+        int roll = _rng.Next(GameConstants.EventRollMax);
         int EventChancePercent = risk;
 
         if (roll < EventChancePercent)

@@ -1,4 +1,4 @@
 public interface ISpaceEvent
 {
-    void Apply(Player player);
+    void Execute(Player player);
 }

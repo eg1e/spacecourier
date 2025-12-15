@@ -1,6 +1,6 @@
 public class FuelStationPlanet : Planet
 {
-    private readonly int _refuelAmount = 40;
+    private readonly int _refuelAmount = GameConstants.RefuelAmount;
 
     public FuelStationPlanet(string name) : base(name) { }
 

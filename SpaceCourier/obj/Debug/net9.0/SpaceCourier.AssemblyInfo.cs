@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SpaceCourier")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d85dc89ceb26595a71adb8ba6a1ae594cdf972e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0c809a86398f3a2b40908123671708524e297e4b")]
 [assembly: System.Reflection.AssemblyProductAttribute("SpaceCourier")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SpaceCourier")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

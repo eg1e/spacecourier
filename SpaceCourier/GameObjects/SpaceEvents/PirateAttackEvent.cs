@@ -1,6 +1,6 @@
 public class PirateAttackEvent : ISpaceEvent
 {
-    public void Apply(Player player)
+    public void Execute(Player player)
     {
         player.LoseCargo();
     }

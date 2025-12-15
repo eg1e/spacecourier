@@ -1,7 +1,7 @@
 public class NavigationErrorEvent : ISpaceEvent
 {
-    public void Apply(Player player)
+    public void Execute(Player player)
     {
-        player.SpendFuel(15);
+        player.SpendFuel(GameConstants.NavigationErrorDamage);
     }
 }

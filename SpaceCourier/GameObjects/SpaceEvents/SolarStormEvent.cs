@@ -1,7 +1,7 @@
 class SolarStormEvent : ISpaceEvent
 {
-    public void Apply(Player player)
+    public void Execute(Player player)
     {
-        player.SpendFuel(10);
+        player.SpendFuel(GameConstants.SolarStormDamage);
     }
 }

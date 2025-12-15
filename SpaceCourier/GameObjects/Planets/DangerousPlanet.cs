@@ -3,7 +3,7 @@ using System;
 public class DangerousPlanet : Planet
 {
     private readonly int _dangerLevel;
-    private readonly int _fuelPricePerDangerLevel = 5;
+    private readonly int _fuelPricePerDangerLevel = GameConstants.FuelPricePerDangerLevel;
 
     public DangerousPlanet(string name, int danger) : base(name)
     {

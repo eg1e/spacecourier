@@ -42,7 +42,7 @@ public class GameEngine
 
         if (spaceEvent != null)
         {
-            spaceEvent.Apply(player);
+            spaceEvent.Execute(player);
             message = spaceEvent.GetType().Name.Replace("Event", " occurred!");
         }
 

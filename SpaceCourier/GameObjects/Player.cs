@@ -6,7 +6,7 @@ public class Player
     private int _fuel;
     public int Fuel => _fuel;
     public bool IsCargoLost { get; private set; }
-    private const int _fuelTankCapacity = 200;
+    private const int _fuelTankCapacity = GameConstants.FuelTankCapacity;
 
     public Player(Planet start, int initialFuel)
     {
